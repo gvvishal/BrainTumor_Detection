@@ -29,8 +29,14 @@ function Home() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      {/* ===== HERO SECTION ===== */}
+    <Box 
+    sx={{ flexGrow: 1,
+      display: "flex",
+      flexDirection: "column",
+      alighnItems: "center",
+      justifyContent: "center",
+      width: "100%"
+    }}>
       <Box
         sx={{
           py: 10,
@@ -105,7 +111,7 @@ function Home() {
             </Grid>
 
             {/* Right Side Image */}
-            <Grid item xs={12} md={6}>
+            {/* <Grid item xs={12} md={6}>
               <img
                 src="https://img.freepik.com/free-vector/artificial-intelligence-ai-chip-technology-background_1017-23992.jpg"
                 alt="AI Brain Tumor Detection"
@@ -115,7 +121,7 @@ function Home() {
                   boxShadow: "0 8px 30px rgba(0,0,0,0.2)",
                 }}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Container>
       </Box>
@@ -140,7 +146,7 @@ function Home() {
           accurate detection, strong data privacy, and actionable insights.
         </Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} justifyContent="center">
           {/* Card 1 */}
           <Grid item xs={12} md={4}>
             <Link to="/accuracy" style={{ textDecoration: "none" }}>
