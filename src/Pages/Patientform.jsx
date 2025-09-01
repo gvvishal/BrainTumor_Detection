@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -19,11 +20,13 @@ export default function PatientForm() {
     date: "",
     mri: null,
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "age" && value < 0) return;
+    if (name === "age" && value < 0) {
+      e.target.value = 0;
+      return;
+    }
 
     setFormData((prev) => ({
       ...prev,
@@ -32,6 +35,7 @@ export default function PatientForm() {
   };
   let file = null;
   const handleFileChange = (e) => {
+    console.log(e.target.files);
     file = e.target.files[0];
     if (file) {
       setFormData((prev) => ({
@@ -40,24 +44,25 @@ export default function PatientForm() {
       }));
     }
   };
+  //   const handleClearImage = () => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     mri: null,
+  //   }));
+  // };  
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitted Data:", formData);
 
-    // Example: send file + formData
-    // const formDataObj = new FormData();
-    // formDataObj.append("name", formData.name);
-    // formDataObj.append("age", formData.age);
-    // formDataObj.append("gender", formData.gender);
-    // formDataObj.append("date", formData.date);
-    // formDataObj.append("mri", formData.mri);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log("Submitted Data:", formData);
 
-    // fetch("/api/patients", {
-    //   method: "POST",
-    //   body: formDataObj,
-    // });
-  };
+  try {
+    const response = await axios.post('https://2v35bsuq61.execute-api.ap-south-1.amazonaws.com/dev/add-patients', formData);
+    console.log('Response:', response.data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
   return (
     <Box
@@ -137,16 +142,16 @@ export default function PatientForm() {
         />
 
         {/* Upload MRI Scan */}
-        {!file && (<Button
+        <Button
           variant="outlined"
           component="label"
           fullWidth
           startIcon={<CloudUploadIcon />}
           sx={{ mt: 2 }}
         >
-          Upload MRI Scan
+        {formData.mri ? formData.mri.name : "Upload MRI Scan"}
           <input type="file" hidden accept="image/*" onChange={handleFileChange} />
-        </Button>)}
+        </Button>
 
         {formData.mri && (
           <Typography
