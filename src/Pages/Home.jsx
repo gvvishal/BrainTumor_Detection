@@ -68,6 +68,7 @@ function Home() {
               </Typography>
 
               <Stack direction="row" spacing={2} mt={4}>
+                <Link to="/add-patient" style={{ textDecoration: "none" }}>
                 <Button
                   variant="contained"
                   size="large"
@@ -79,10 +80,11 @@ function Home() {
                     fontSize: "1rem",
                     textTransform: "none",
                   }}
-                  onClick={handleUploadClick}
+                  // onClick={handleUploadClick}
                 >
-                  Upload MRI Scan
+                  Add Patient
                 </Button>
+                </Link>
                 <Link to="/accuracy" style={{ textDecoration: "none" }}>
                   <Button
                     variant="outlined"

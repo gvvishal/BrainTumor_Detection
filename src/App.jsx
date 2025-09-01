@@ -6,7 +6,7 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import HowItWorks from "./Pages/HowItWorks";
 import Admin from "./Pages/Admin";  // ✅ Add Admin Page
-
+import PatientForm from "./Pages/Patientform";
 function App() {
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -20,6 +20,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/admin" element={<Admin />} /> {/* ✅ Admin Route */}
+          <Route path="/add-patient" element={<PatientForm />} />
         </Routes>
       </div>
 
